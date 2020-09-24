@@ -1,0 +1,2248 @@
+openapi: 3.0.0
+info:
+  description: FAA LAANC REST API Documentation [API Version 4]
+  title: FAA LAANC REST API Documentation [API Version 4]
+  license: {}
+  version: ""
+tags:
+  - name: FAA LAANC REST API Documentation
+    description: " "
+paths:
+  /api/ext/v4/107/autoauthorization:
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Create Auto Authorization (Part 107)
+      description: >-
+        Call this method to store a Part 107 Auto Authorization. Input must be a
+        valid GeoJSON Feature Collection and, once validation is passed, a Part
+        107 Auto Authorization will be stored.
+
+
+        Acceptable GeoJSON Geometry is a valid Point or Polygon with the proper corresponding coordinates. The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) [WGS84] datum, with longitude and latitude units of decimal degrees. Type must be “Feature” and must contain Properties with the operation information. A Polygon must be a valid closed polygon with no interior rings. Note: polygons may be clockwise or counterclockwise.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, or within the automatically approved altitude threshold, an exception will be thrown, and the auto authorization will not be saved.
+      operationId: createPart107AuthorizationUsingPOST_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeatureCollectionAuthDTO_OperationPropert\
+                ies107AuthDTO_"
+        description: featureCollection107DTO
+        required: true
+      responses:
+        "201":
+          description: CREATED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssRequestResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/107/autoauthorizationUpdate:
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Auto Authorization Update (Part 107)
+      description: >-
+        Call this method to update a Part 107 Auto Authorization. Input must be
+        a valid GeoJSON Feature Collection and, once validation is passed, a
+        Part 107 Auto Authorization will be updated.
+
+
+        Acceptable GeoJSON Geometry is a valid Point or Polygon with the proper corresponding coordinates. The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) [WGS84] datum, with longitude and latitude units of decimal degrees. Type must be “Feature” and must contain Properties with the operation information. A Polygon must be a valid closed polygon with no interior rings. Note: polygons may be clockwise or counterclockwise.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, or within the automatically approved altitude threshold, an exception will be thrown, and the auto authorization will not be updated.
+      operationId: updatePart107AuthorizationUsingPOST_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeatureCollectionAuthDTO_OperationPropert\
+                ies107AuthUpdateDTO_"
+        description: featureCollection107DTO
+        required: true
+      responses:
+        "201":
+          description: UPDATED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssRequestResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/107/requestauthorization:
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Request Authorization (Part 107)
+      description: >-
+        Call this method to store a Part 107 Request Authorization. Input must
+        be a valid GeoJSON Feature Collection and, once validation is passed, a
+        Part 107 Request Authorization will be stored.
+
+
+        Acceptable GeoJSON Geometry is a valid Point or Polygon with the proper corresponding coordinates. The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) [WGS84] datum, with longitude and latitude units of decimal degrees. Type must be “Feature” and must contain Properties with the operation information. A Polygon must be a valid closed polygon with no interior rings. Note: polygons may be clockwise or counterclockwise.
+
+
+        Validations will be conducted when this method is called. If a field is not valid an exception will be thrown, and the request authorization will not be saved.
+      operationId: createPart107ReconsiderationUsingPOST_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeatureCollectionAuthDTO_OperationPropert\
+                ies107RFRDTO_"
+        description: featureCollection107DTO
+        required: true
+      responses:
+        "201":
+          description: CREATED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssRequestResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/44809/autoauthorization:
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Create Auto Authorization (44809)
+      description: >-
+        Call this method to store a 44809 Auto Authorization. Input must be a
+        valid GeoJSON Feature Collection and, once validation is passed, a 44809
+        Auto Authorization will be stored.
+
+
+        Acceptable GeoJSON Geometry is a valid Point or Polygon with the proper corresponding coordinates. The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) [WGS84] datum, with longitude and latitude units of decimal degrees. Type must be “Feature” and must contain Properties with the operation information. A Polygon must be a valid closed polygon with no interior rings. Note: polygons may be clockwise or counterclockwise.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, or within the automatically approved altitude threshold, an exception will be thrown, and the auto authorization will not be saved.
+      operationId: createPart44809AuthorizationUsingPOST_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeatureCollectionAuthDTO_OperationPropert\
+                ies44809AuthDTO_"
+        description: featureCollection44809DTO
+        required: true
+      responses:
+        "201":
+          description: CREATED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssRequestResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/44809/autoauthorizationUpdate:
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Auto Authorization Update (44809)
+      description: >-
+        Call this method to update a 44809 Auto Authorization. Input must be a
+        valid GeoJSON Feature Collection and, once validation is passed, a 44809
+        Auto Authorization will be updated.
+
+
+        Acceptable GeoJSON Geometry is a valid Point or Polygon with the proper corresponding coordinates. The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84) [WGS84] datum, with longitude and latitude units of decimal degrees. Type must be “Feature” and must contain Properties with the operation information. A Polygon must be a valid closed polygon with no interior rings. Note: polygons may be clockwise or counterclockwise.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, or within the automatically approved altitude threshold, an exception will be thrown, and the auto authorization will not be updated.
+      operationId: updatePart44809AuthorizationUsingPOST_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FeatureCollectionAuthDTO_OperationPropert\
+                ies44809AuthUpdateDTO_"
+        description: featureCollection44809DTO
+        required: true
+      responses:
+        "201":
+          description: UPDATED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssRequestResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/ackRescindedOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Rescind Acknowledgement
+      description: >-
+        Call this method to acknowledge any Authorizations that were rescinded
+        by AT.  Input must be an operation id that can identify the
+        operation.  This method should be used by the USS for operators to
+        acknowledge an operation that was rescinded by AT. The method can be
+        called at any time after the authorization is rescinded.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the acknowledgement will not be completed.
+      operationId: acknowledgeRescindedOperationUsingPOST
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ACKNOWLEDGED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/autocancelOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Automatic Cancel
+      description: >-
+        Call this method to cancel any Further Coordination Authorizations that
+        are pending for 24 hours before the proposed start time if the FAA has
+        not approved or denied the requests. This method should be used for
+        cancellations that have been initiated by USS automation – not
+        cancellations that have been initiated by the operator.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the cancellation will not be completed.
+      operationId: autocancelOperationUsingPOST_1
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CANCELED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/cancelOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Operator Cancel
+      description: >-
+        Call this method to cancel any Authorizations that are no longer valid
+        or needed. Input must be an operation id that can identify the request
+        for operation. This method should be used by the USS for
+        operator-initiated cancellations – not cancellations that have been
+        initiated by USS automation.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the cancellation will not be completed.
+      operationId: cancelOperationUsingPOST_2
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CANCELED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/closeOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Close Operation
+      description: >-
+        Call this method to indicate the termination of an operation.  Input
+        must be an operation id that can identify the operation.  This method
+        should be used by the USS for operators to close an authorized operation
+        that has ended prior to the filed stop time.  This method can only be
+        called after the start time of the operation.  
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the close will not be completed.
+      operationId: closeOperationUsingPOST
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CLOSED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/deleteOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Delete Operation
+      description: >-
+        Call this method to indicate any Authorization records that have been
+        deleted by the user. Input must be an operation id that can identify the
+        request for operation. This method should be used by the USS for
+        operator-initiated deletion requests. Calling this method will cause the
+        data to be marked as deleted on the FAA-side and will be omitted from
+        the O&M statistics.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the deletion will not be completed. Operations can only be deleted when they have reached a terminal state (complete, never-authorized, or de-authorized). USS may need to coordinate with the operator to get the operations to a terminal state. If the operation state is not valid, an exception will be thrown, and the deletion will not be completed.
+      operationId: deleteOperationUsingPOST
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: DELETED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/getUssMessages:
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Get USS Messages
+      description: Call this method to retrieve all undelivered request messages for your
+        associated USS. Note that once request messages are retrieved, they will
+        be marked as processed and will not be able to be retrieved again.
+      operationId: pollUndeliveredMessagesUsingGET_2
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UssMessageDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/invalidcancelOperation/{operationId}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Invalid Cancel
+      description: >-
+        Call this method to cancel a previously authorized or pending operation
+        that is no longer valid.  Input must be an operation id that can
+        identify the operation.  This method should be used by the USS upon
+        detection of an invalid authorization (e.g., change to the UASFM
+        grid).  This method can only be called prior to the start time of the
+        operation.  
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the cancellation will not be completed.
+      operationId: invalidCancelOperationUsingPOST
+      parameters:
+        - name: operationId
+          in: path
+          description: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: CANCELED
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationActionResponseDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "409":
+          description: "Conflict: Action cannot be performed."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "424":
+          description: "Failed Dependency: GIS service interruption."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/noOp/{noopID}":
+    post:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: No Operation (Notify Trigger)
+      description: >-
+        Call this method to trigger the Notify response of the USS Webhook API.
+        Input must be an operation id with a prefix of “NOOP”.  This method
+        should be used by the USS to test if the webhook functionality is
+        behaving correctly in any environment, notably in the Production
+        Environment.
+
+
+        Validations will be conducted when this method is called. If a field is not valid, an exception will be thrown, and the processing will not be completed.
+
+
+        Calling this method will return a 200 HTTP status code response of OK with no Body.
+      operationId: noOpUsingPOST
+      parameters:
+        - name: noopID
+          in: path
+          description: 9-character identifier beginning with "NOOP" followed by 5
+            additional characters.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/operationlist:
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Open Operations
+      description: Call this end point to retrieve all the submissions that are
+        active/open. Note that canceled, denied, and completed operations are
+        not listed. By default, this endpoint lists 100 reference codes
+        (active/open only) and their state, along with a “next_page_key”
+        parameter. The list will be ordered according to the order in which the
+        original operations submissions were received. The “next_page_key” is a
+        key that should be used in the path of the following request to retrieve
+        the next page results. Calls that include the “next_page_key” parameter
+        will be limited to those results gathered in the original call to this
+        endpoint – underlying data changes since the time of the original (page
+        1) call will not be included in subsequent “next page” calls. If the
+        original results are limited to a single page, the “next_page_key” is
+        omitted.  Number of reference codes returned can be limited by using the
+        “limit” parameter in the path, up to a max of 500.
+      operationId: getOpenOperationsUsingGET_1
+      parameters:
+        - name: limit
+          in: query
+          description: Limits the number of operations returned per page in the response.
+            (Default = 100, max = 500)
+          required: false
+          schema:
+            type: string
+        - name: next_page_key
+          in: query
+          description: Instructs the endpoint to return the next page of results.  The key
+            is derived from the previous page response metadata.
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "OK (Note: when no open operations exist, the response will return a
+            status 200 OK code with no Body.)"
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OpenOperationsResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/operationstatistics:
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Operational Statistics
+      description: >-
+        Call this end point to retrieve the operational statistics of operations
+        between the datetime range passed and verify that the statistics match
+        sufficiently – and thereby ensure proper operations on both sides.  
+
+
+        How Operations are Filtered
+
+        Operation start datetimes and operation end datetimes of authorizations, not authorization submission datetimes, are used to return the statistics for the defined time span in the call. If the duration of an operation touches the filter criteria, it is returned. The image below visually represents this concept. With time represented horizontally, each yellow highlighted bar represents an operation and its duration. The first vertical dashed line represents the filter start datetime and the second dash represents the filter end datetime. In the below examples, all the highlighted operations would be returned by the endpoint.
+
+
+        
+      operationId: getOperationStatisticsUsingGET_1
+      parameters:
+        - name: datetimeStart
+          in: query
+          description: Start date and time of the operations in ISO format.
+          required: true
+          schema:
+            type: string
+        - name: datetimeEnd
+          in: query
+          description: End date and time of the operations in ISO format.
+          required: true
+          schema:
+            type: string
+        - name: facility
+          in: query
+          description: Three/Four char facility ID. If none provided all the facilities
+            statistics are returned. (more than one facility accepted when comma
+            separated)
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationStatisticsResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  "/api/ext/v4/operationstatus/{referenceNumber}":
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Operation Status
+      description: Call this endpoint to retrieve the status of a particular Authorization
+        (by Reference Number), and the state history change times. This endpoint
+        retrieves the specified status for the USS that created the operation
+        (i.e. successful responses will only be returned to the originating
+        USS).
+      operationId: getOperationStatusUsingGET_1
+      parameters:
+        - name: referenceNumber
+          in: path
+          description: 12-character Reference Number
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/OperationStatusResponseDTO"
+        "400":
+          description: "Bad Request: The request contains one or more validation errors, or
+            the request body of a POST request contains malformed JSON."
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "410":
+          description: "Gone: Status information is not available for operations that
+            reached a final state more than 30 days ago."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /api/ext/v4/status:
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: Health Status and Versions
+      description: >-
+        Call this endpoint to retrieve the FAA system status and the versions
+        that are in use (software versions, data model versions, critical
+        dataset versions, etc.). 
+
+
+        Codes for “internal use” are diagnostic identifiers that have significance to some FAA recipients (such as the Enterprise Control Center (ECC) or system monitoring groups). Internal use codes will not generally be published. Dataset values are the Authoritative Source for that service. Last edit dates are populated from the editingInfo attribute contained in JSON metadata for the Data Source link.
+      operationId: getSystemStatusUsingGET_1
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/HealthStatusResponseDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+  /oauth/v4/key:
+    get:
+      tags:
+        - FAA LAANC REST API Documentation
+      summary: LAANC-signed Token Authentication
+      description: >-
+        Each call made to USS endpoints will include a LAANC generated and
+        signed JWT.  The JWT will be included in the header under
+        “Authorization” key. The LAANC system uses the type “FAALAANC”, for
+        example:
+
+
+        Authorization: FAALAANC <JWT>
+
+
+        The JWT will contain 3 parts as defined in RFC 7519 (https://tools.ietf.org/html/rfc7519), the header, payload, and signature.  The header contains the signing algorithm and a key ID.  The payload contains the token expiration timestamp.
+
+
+        In order to verify the authenticity of each request, the USS application will use the LAANC public key matching the provided key ID (36-character UUID/GUID) to validate the signature.  The USS must retrieve the public key from the LAANC server; the key should be cached so that future JWTs referencing the same key ID may be validated without additional roundtrips to the LAANC system.  If the token has not expired and the signature is valid, then the request should be granted. If the input key ID is not found, a 404 response will be returned.
+      operationId: getKeyUsingGET_1
+      parameters:
+        - name: kid
+          in: query
+          description: "kid used to retrieve associated public key.  (Format:
+            required=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/UssPublicKeyDTO"
+        "400":
+          description: "Bad Request: The request contains a validation error, or the
+            request body of a POST request contains malformed JSON. "
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "401":
+          description: "Unauthorized: Authorization credentials are invalid."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "403":
+          description: "Forbidden: API access privileges have not been granted for this
+            account."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "404":
+          description: Not Found.
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+        "500":
+          description: "Internal Server Error: Unknown error."
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/LaancErrorDTO"
+servers:
+  - url: //laanc-api.faa.gov/laanc
+components:
+  schemas:
+    LaancErrorDTO:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Error code associated with the error.
+        field:
+          type: string
+          description: The name of the field failing validation.
+        message:
+          type: string
+          description: A message to explain why this field failed validation.
+    OpenOperationsDTO:
+      type: object
+      required:
+        - operation
+        - state
+        - submissionCategory
+        - submissionType
+      properties:
+        operation:
+          type: string
+          description: The unique identifier for the operation.
+        state:
+          type: string
+          description: 'Status of the operation. (Values: "Authorized" - Approved
+            authorization that has not yet finished, "Pending" - Active request
+            has not yet been approved or denied, "Rescinded_Awaiting" -
+            authorization rescinded and acknowledgement needed from operator)'
+        submissionCategory:
+          type: string
+          description: 'The operation submission regulation category. (Values: "107",
+            "44809")'
+        submissionType:
+          type: string
+          description: 'The operation submission type, Auto approved or further
+            coordination. (Values: "AA", "FC")'
+      description: Open operation and its state.
+    OperationProperties44809AuthDTO:
+      type: object
+      required:
+        - airspaceClassCodes
+        - facility
+        - facilityMaps
+        - operationDuration
+        - operationID
+        - operationMaxAltitude
+        - operationStartDateTime
+        - pocFirstName
+        - pocLastName
+        - pocPhoneNumber
+      properties:
+        airspaceClassCodes:
+          type: array
+          description: 'The list of Airspace Class Codes. Allowed values: "B", "C", "D",
+            "E"'
+          items:
+            type: string
+        facility:
+          type: string
+          description: "The unique identifier for the facility. (Size: min=3, max=4)"
+        facilityMaps:
+          type: array
+          description: The list of facility maps that the operation will intersect. Each
+            element must include the globalId and lastEditDate for that facility
+            map grid.
+          items:
+            $ref: "#/components/schemas/FacilityMapDTO"
+        operationDuration:
+          type: integer
+          format: int32
+          description: The length of time in minutes of the operation. The duration must be
+            between 1 and 720 minutes.
+        operationID:
+          type: string
+          description: "The unique identifier for the operation. (Size: required=9)"
+        operationMaxAltitude:
+          type: integer
+          format: int32
+          description: "The maximum operation altitude above ground level (AGL) in feet.
+            (value: min=1, max=400)"
+        operationRadius:
+          type: number
+          format: double
+          description: "For Points, the distance in nautical miles of the operation from
+            the provided latitude and longitude point. For Polygons, no value
+            can be specified. (Size: min=1 char, max=10 chars; Value: max linear
+            extent =10nmi; Format: floating point number)"
+        operationStartDateTime:
+          type: string
+          description: "The start date and time of the operation. The start date and time
+            must be in the future but cannot be more than 90 days in the future.
+            (Format: required= yyyy-MM-ddTHH:mm:ssZ ). Time Zone is UTC"
+        pocFirstName:
+          type: string
+          description: "The point of contact's first name. (Size: max=60 characters)"
+        pocLastName:
+          type: string
+          description: "The point of contact's last name. (Size: max=60 characters)"
+        pocPhoneNumber:
+          type: integer
+          format: int32
+          description: "The point of contact’s phone number. (Size: min=2, max=15)"
+        registrationNumbers:
+          type: array
+          description: "The list of registration numbers for the sUASs that will be
+            operated during the operation. (Size: min=1, max=13)"
+          items:
+            type: string
+      description: The UAS flight plan information.
+    OperationStatusResponseDTO:
+      type: object
+      required:
+        - status
+        - submissionCategory
+        - submissionDateTime
+        - submissionType
+      properties:
+        ackRescindDateTime:
+          type: string
+          description: >-
+            Time at which the operation was acknowledged, if acknowledged.
+            (Values: Time in format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "ackRescindDateTime" is required when there is a corresponding time value. When the value is null "ackRescindDateTime" may be omitted from the message.
+        approvalDateTime:
+          type: string
+          description: >-
+            Time at which the operation was approved, if approved. (Values: Time
+            in format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "approvalDateTime" is required when there is a corresponding time value. When the value is null "approvalDateTime" may be omitted from the message.
+        cancelDateTime:
+          type: string
+          description: >-
+            Time at which the operation was cancelled, if cancelled. (Values:
+            Time in format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "cancelDateTime" is required when there is a corresponding time value. When the value is null "cancelDateTime" may be omitted from the message.
+        changeDateTime:
+          type: string
+          description: >-
+            Time at which the operation was changed/updated, if applicable.
+            (Values: Time in format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "changeDateTime" is required when there is a corresponding time value. When the value is null "changeDateTime" may be omitted from the message.
+        closeDateTime:
+          type: string
+          description: >-
+            Time at which the operation was closed, if closed. (Values: Time in
+            format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "closeDateTime" is required when there is a corresponding time value. When the value is null "closeDateTime" may be omitted from the message.
+        denialDateTime:
+          type: string
+          description: >-
+            Time at which the operation was denied, if denied. (Values: Time in
+            format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "denialDateTime" is required when there is a corresponding time value. When the value is null "denialDateTime" may be omitted from the message.
+        rescindDateTime:
+          type: string
+          description: >-
+            Time at which the operation was rescinded, if applicable. (Values:
+            Time in format required=yyyy-MM-ddTHH:mm:ssZ  or null)
+
+
+            Note: "rescindDateTime" is required when there is a corresponding time value. When the value is null "rescindDateTime" may be omitted from the message.
+        status:
+          type: string
+          description: >-
+            Status of the operation. (Values: 
+
+            1.	"Authorized" – Approved authorization that has not yet finished
+
+            2.	"Complete" - Approved authorization that has finished at its originally submitted end time or by an operator action indicating the authorization is closed
+
+            3.	"Pending" - Active request has not yet been approved or denied
+
+            4.	"Never Authorized" - Authorization request was denied, expired, or auto canceled
+
+            5.	"De-Authorized" - authorization or request was canceled or acknowledged before starting (note: would have previously been a different status, such as FC Pending or almost any other status)
+
+            6.	"Rescinded_Awaiting" - authorization rescinded and acknowledgement needed from operator)
+        submissionCategory:
+          type: string
+          description: 'The operation submission regulation category (Values: "107",
+            "44809")'
+        submissionDateTime:
+          type: string
+          description: "Operation submission time (Format: required=yyyy-MM-ddTHH:mm:ssZ).
+            ISO time"
+        submissionType:
+          type: string
+          description: 'The operation submission type, Auto approved or further
+            coordination. (Values: "AA", "FC")'
+    OperationProperties107RFRDTO:
+      type: object
+      required:
+        - airspaceClassCodes
+        - facility
+        - facilityMaps
+        - operationDuration
+        - operationID
+        - operationMaxAltitude
+        - operationStartDateTime
+        - pocFirstName
+        - pocLastName
+        - pocPhoneNumber
+        - safetyJustification
+      properties:
+        airspaceClassCodes:
+          type: array
+          description: 'The list of Airspace Class Codes. Allowed values: "B", "C", "D",
+            "E"'
+          items:
+            type: string
+        facility:
+          type: string
+          description: "The unique identifier for the facility. (Size: min=3, max=4)"
+        facilityMaps:
+          type: array
+          description: The list of facility maps that the operation will intersect. Each
+            element must include the globalId and lastEditDate for that facility
+            map grid.
+          items:
+            $ref: "#/components/schemas/FacilityMapDTO"
+        operationDuration:
+          type: integer
+          format: int32
+          description: The length of time in minutes of the operation. The duration must be
+            between 1 and 720 minutes.
+        operationID:
+          type: string
+          description: "The unique identifier for the operation. (Size: required=9)"
+        operationMaxAltitude:
+          type: integer
+          format: int32
+          description: "The maximum operation altitude above ground level (AGL) in feet.
+            (value: min=1, max=400)"
+        operationRadius:
+          type: number
+          format: double
+          description: "For Points, the distance in nautical miles of the operation from
+            the provided latitude and longitude point. For Polygons, no value
+            can be specified. (Size: min=1 char, max=10 chars; Value: max linear
+            extent =10nmi; Format: floating point number)"
+        operationStartDateTime:
+          type: string
+          description: "The start date and time of the operation. The start date and time
+            must be in the future but cannot be more than 90 days in the future.
+            (Format: required= yyyy-MM-ddTHH:mm:ssZ ). Time Zone is UTC"
+        pocFirstName:
+          type: string
+          description: "The point of contact's first name. (Size: max=60 characters)"
+        pocLastName:
+          type: string
+          description: "The point of contact's last name. (Size: max=60 characters)"
+        pocPhoneNumber:
+          type: integer
+          format: int32
+          description: "The point of contact’s phone number. (Size: min=2, max=15)"
+        registrationNumbers:
+          type: array
+          description: "The list of registration numbers for the sUASs that will be
+            operated during the operation. (Size: min=1, max=13)"
+          items:
+            type: string
+        safetyJustification:
+          type: string
+          description: >-
+            The Safety Justification for the Request for Reconsideration.
+            (Limited to the Latin Unicode character set. Size: min=0, max=2000
+            characters)
+             
+            Note: min=0 indicates that the "safetyJustification" can be blank.
+      description: The UAS flight plan information.
+    GeometryDTO:
+      type: object
+      required:
+        - coordinates
+        - type
+      properties:
+        coordinates:
+          type: array
+          description: The GeoJSON Geometry coordinates array using the WGS 84 datum, with
+            longitude and latitude units of decimal degrees.
+          items:
+            type: object
+        type:
+          type: string
+          description: "The GeoJSON geometry type. (Values: Point or Polygon)"
+      description: The valid GeoJSON geometry object of type Point or Polygon that defines
+        the flight location.
+    OpenOperationsResponseDTO:
+      type: object
+      required:
+        - operations
+        - response_metadata
+      properties:
+        operations:
+          type: array
+          description: Open operations returned by the endpoint and their state.
+          items:
+            $ref: "#/components/schemas/OpenOperationsDTO"
+        response_metadata:
+          $ref: "#/components/schemas/ResponseMetadataDTO"
+    UssPublicKeyDTO:
+      type: object
+      required:
+        - alg
+        - e
+        - kid
+        - kty
+        - n
+        - status
+        - use
+      properties:
+        alg:
+          type: string
+        e:
+          type: string
+        kid:
+          type: string
+        kty:
+          type: string
+        n:
+          type: string
+        status:
+          type: string
+        use:
+          type: string
+    HealthStatusResponseDTO:
+      type: object
+      required:
+        - codes
+        - laancAPAirScheduleDataset
+        - laancAPAirScheduleDatasetLastEditDate
+        - laancAPAirportsDataset
+        - laancAPAirportsDatasetLastEditDate
+        - laancAPApiVersion
+        - laancAPClassAirspaceDataset
+        - laancAPClassAirspaceDatasetLastEditDate
+        - laancAPFrzDataset
+        - laancAPFrzDatasetLastEditDate
+        - laancAPFtNsufrDataset
+        - laancAPFtNsufrDatasetLastEditDate
+        - laancAPPtNsufrDataset
+        - laancAPPtNsufrDatasetLastEditDate
+        - laancAPStadiumsDataset
+        - laancAPStadiumsDatasetLastEditDate
+        - laancAPSuaDataset
+        - laancAPSuaDatasetLastEditDate
+        - laancAPUasfmDataset
+        - laancAPUasfmDatasetLastEditDate
+        - laancAPVersion
+        - status
+      properties:
+        codes:
+          type: array
+          description: "{internal use}"
+          items:
+            type: string
+        laancAPAirScheduleDataset:
+          type: string
+          description: Airspace Schedule Dataset
+        laancAPAirScheduleDatasetLastEditDate:
+          type: string
+          description: "Airspace Schedule Dataset Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPAirportsDataset:
+          type: string
+          description: Airports Dataset
+        laancAPAirportsDatasetLastEditDate:
+          type: string
+          description: "Airports Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPApiVersion:
+          type: string
+          description: LAANC API Version
+        laancAPClassAirspaceDataset:
+          type: string
+          description: Class Airspace Dataset
+        laancAPClassAirspaceDatasetLastEditDate:
+          type: string
+          description: "Class Airspace Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPFrzDataset:
+          type: string
+          description: FRZ Dataset
+        laancAPFrzDatasetLastEditDate:
+          type: string
+          description: "FRZ Dataset Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPFtNsufrDataset:
+          type: string
+          description: FT NSUFR Dataset
+        laancAPFtNsufrDatasetLastEditDate:
+          type: string
+          description: "FT NSUFR Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPPtNsufrDataset:
+          type: string
+          description: PT NSUFR Dataset
+        laancAPPtNsufrDatasetLastEditDate:
+          type: string
+          description: "PT NSUFR Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPStadiumsDataset:
+          type: string
+          description: Stadiums Dataset
+        laancAPStadiumsDatasetLastEditDate:
+          type: string
+          description: "Stadium Dataset Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPSuaDataset:
+          type: string
+          description: Special User Airspace Dataset
+        laancAPSuaDatasetLastEditDate:
+          type: string
+          description: "SUA Dataset Last Edit date/time (Format:
+            required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPUasfmDataset:
+          type: string
+          description: UAS Facility Maps Dataset
+        laancAPUasfmDatasetLastEditDate:
+          type: string
+          description: "UASFM Last Edit date/time (Format: required=yyyy-MM-ddTHH:mm:ssZ)"
+        laancAPVersion:
+          type: string
+          description: System Version
+        status:
+          type: string
+          description: 'System status. (Values: "UP" or "DOWN")'
+    FacilityMapDTO:
+      type: object
+      required:
+        - globalId
+        - lastEditDate
+      properties:
+        globalId:
+          type: string
+          description: The unique ArcGIS GlobalID for the facility map grid.
+        lastEditDate:
+          type: string
+          description: The ArcGIS last edit date (LAST_EDIT_DT) for the facility map grid.
+      description: A facility map that the operation will intersect. This element must
+        include the globalId and lastEditDate for this facility map grid.
+    OperationProperties107AuthUpdateDTO:
+      type: object
+      required:
+        - airspaceClassCodes
+        - facility
+        - facilityMaps
+        - operationDuration
+        - operationID
+        - operationMaxAltitude
+        - operationStartDateTime
+        - pocFirstName
+        - pocLastName
+        - pocPhoneNumber
+      properties:
+        airspaceClassCodes:
+          type: array
+          description: 'The list of Airspace Class Codes. Allowed values: "B", "C", "D",
+            "E"'
+          items:
+            type: string
+        facility:
+          type: string
+          description: "The unique identifier for the facility. (Size: min=3, max=4)"
+        facilityMaps:
+          type: array
+          description: The list of facility maps that the operation will intersect. Each
+            element must include the globalId and lastEditDate for that facility
+            map grid.
+          items:
+            $ref: "#/components/schemas/FacilityMapDTO"
+        operationDuration:
+          type: integer
+          format: int32
+          description: The length of time in minutes of the operation. The duration must be
+            between 1 and 720 minutes.
+        operationID:
+          type: string
+          description: "The unique identifier for the operation. (Size: required=9)"
+        operationMaxAltitude:
+          type: integer
+          format: int32
+          description: "The maximum operation altitude above ground level (AGL) in feet.
+            (value: min=1, max=400)"
+        operationRadius:
+          type: number
+          format: double
+          description: "For Points, the distance in nautical miles of the operation from
+            the provided latitude and longitude point. For Polygons, no value
+            can be specified. (Size: min=1 char, max=10 chars; Value: max linear
+            extent =10nmi; Format: floating point number)"
+        operationStartDateTime:
+          type: string
+          description: "The start date and time of the operation. The start date and time
+            must be in the future but cannot be more than 90 days in the future.
+            (Format: required= yyyy-MM-ddTHH:mm:ssZ ). Time Zone is UTC"
+        pocFirstName:
+          type: string
+          description: "The point of contact's first name. (Size: max=60 characters)"
+        pocLastName:
+          type: string
+          description: "The point of contact's last name. (Size: max=60 characters)"
+        pocPhoneNumber:
+          type: integer
+          format: int32
+          description: "The point of contact’s phone number. (Size: min=2, max=15)"
+        registrationNumbers:
+          type: array
+          description: "The list of registration numbers for the sUASs that will be
+            operated during the operation. (Size: min=1, max=13)"
+          items:
+            type: string
+      description: The UAS flight plan information.
+    OperationStatisticsResponseDTO:
+      type: object
+      required:
+        - count107AaSubmitted
+        - count107Cancelled
+        - count107Close
+        - count107FcApproved
+        - count107FcDenied
+        - count107FcExpired
+        - count107FcSubmitted
+        - count107InvalidCancel
+        - count107OperationsSubmitted
+        - count107RescindAck
+        - count107Rescinded
+        - count44809AaSubmitted
+        - count44809Cancelled
+        - count44809Close
+        - count44809InvalidCancel
+        - count44809OperationsSubmitted
+        - count44809RescindAck
+        - count44809Rescinded
+        - countAutoCancelled
+        - countLaancCallSuccess
+      properties:
+        count107AaSubmitted:
+          type: integer
+          format: int32
+          description: Count of 107 Auto-Approved Submitted.
+        count107Cancelled:
+          type: integer
+          format: int32
+          description: Count of 107 operations cancelled.
+        count107Close:
+          type: integer
+          format: int32
+          description: Count of 107 operations closed.
+        count107FcApproved:
+          type: integer
+          format: int32
+          description: Count of 107 Further coordination approved.
+        count107FcDenied:
+          type: integer
+          format: int32
+          description: Count of 107 Further coordination denied.
+        count107FcExpired:
+          type: integer
+          format: int32
+          description: Count of 107 Further coordination expired.
+        count107FcSubmitted:
+          type: integer
+          format: int32
+          description: Count of 107 Further coordination Submitted.
+        count107InvalidCancel:
+          type: integer
+          format: int32
+          description: Count of 107 operations cancelled detected as invalid.
+        count107OperationsSubmitted:
+          type: integer
+          format: int32
+          description: Count of 107 operations submitted.
+        count107RescindAck:
+          type: integer
+          format: int32
+          description: Count of 107 operations rescind acknowledged.
+        count107Rescinded:
+          type: integer
+          format: int32
+          description: Count of 107 operations rescinded.
+        count44809AaSubmitted:
+          type: integer
+          format: int32
+          description: Count of 44809 Auto-Approved submitted.
+        count44809Cancelled:
+          type: integer
+          format: int32
+          description: Count of 44809 operations cancelled.
+        count44809Close:
+          type: integer
+          format: int32
+          description: Count of 44809 operations closed.
+        count44809InvalidCancel:
+          type: integer
+          format: int32
+          description: Count of 44809 operations cancelled detected as invalid.
+        count44809OperationsSubmitted:
+          type: integer
+          format: int32
+          description: Count of 44809 operations submitted.
+        count44809RescindAck:
+          type: integer
+          format: int32
+          description: Count of 44809 operations rescind acknowledged.
+        count44809Rescinded:
+          type: integer
+          format: int32
+          description: Count of 44809 operations rescinded.
+        countAutoCancelled:
+          type: integer
+          format: int32
+          description: Count of operations auto cancelled.
+        countLaancCallSuccess:
+          type: integer
+          format: int32
+          description: Count of successful API calls (includes update calls to the Auto
+            Authorization Update endpoints).
+    OperationProperties107AuthDTO:
+      type: object
+      required:
+        - airspaceClassCodes
+        - facility
+        - facilityMaps
+        - operationDuration
+        - operationID
+        - operationMaxAltitude
+        - operationStartDateTime
+        - pocFirstName
+        - pocLastName
+        - pocPhoneNumber
+      properties:
+        airspaceClassCodes:
+          type: array
+          description: 'The list of Airspace Class Codes. Allowed values: "B", "C", "D",
+            "E"'
+          items:
+            type: string
+        facility:
+          type: string
+          description: "The unique identifier for the facility. (Size: min=3, max=4)"
+        facilityMaps:
+          type: array
+          description: The list of facility maps that the operation will intersect. Each
+            element must include the globalId and lastEditDate for that facility
+            map grid.
+          items:
+            $ref: "#/components/schemas/FacilityMapDTO"
+        operationDuration:
+          type: integer
+          format: int32
+          description: The length of time in minutes of the operation. The duration must be
+            between 1 and 720 minutes.
+        operationID:
+          type: string
+          description: "The unique identifier for the operation. (Size: required=9)"
+        operationMaxAltitude:
+          type: integer
+          format: int32
+          description: "The maximum operation altitude above ground level (AGL) in feet.
+            (value: min=1, max=400)"
+        operationRadius:
+          type: number
+          format: double
+          description: "For Points, the distance in nautical miles of the operation from
+            the provided latitude and longitude point. For Polygons, no value
+            can be specified. (Size: min=1 char, max=10 chars; Value: max linear
+            extent =10nmi; Format: floating point number)"
+        operationStartDateTime:
+          type: string
+          description: "The start date and time of the operation. The start date and time
+            must be in the future but cannot be more than 90 days in the future.
+            (Format: required= yyyy-MM-ddTHH:mm:ssZ ). Time Zone is UTC"
+        pocFirstName:
+          type: string
+          description: "The point of contact's first name. (Size: max=60 characters)"
+        pocLastName:
+          type: string
+          description: "The point of contact's last name. (Size: max=60 characters)"
+        pocPhoneNumber:
+          type: integer
+          format: int32
+          description: "The point of contact’s phone number. (Size: min=2, max=15)"
+        registrationNumbers:
+          type: array
+          description: "The list of registration numbers for the sUASs that will be
+            operated during the operation. (Size: min=1, max=13)"
+          items:
+            type: string
+      description: The UAS flight plan information.
+    OperationActionResponseDTO:
+      type: object
+      required:
+        - message
+        - operation
+        - referenceNbr
+        - result
+        - statusDateTime
+      properties:
+        message:
+          type: string
+          description: A message to explain the result.
+        operation:
+          type: string
+          description: Type of operation.
+        referenceNbr:
+          type: string
+          description: The unique 12-character identifier for the authorization.
+        result:
+          type: string
+          description: Results of the request.
+        statusDateTime:
+          type: integer
+          format: int64
+          description: The DateTime when the call for action on the operation was submitted
+            represented as a Unix timestamp.
+    UssRequestResponseDTO:
+      type: object
+      required:
+        - referenceNumber
+        - statusDateTime
+      properties:
+        referenceNumber:
+          type: string
+          description: "The unique identifier for the authorization. (Size: required=12)"
+        statusDateTime:
+          type: integer
+          format: int64
+          description: The DateTime when the action was taken on the flight operation
+            represented as a Unix timestamp.
+    ResponseMetadataDTO:
+      type: object
+      required:
+        - next_page_key
+      properties:
+        next_page_key:
+          type: string
+          description: Key that should be passed in the path of the following request to
+            fetch the next page values.
+      description: >-
+        "next_page_key" value returned by the endpoint to be passed in the path
+        of the following request. 
+
+
+        Note: "response_metadata" is required when there are open operations to be listed on a next page. When there are no operations for the next page, the "response_metadata" object will be omitted from the response.
+    UssMessageDTO:
+      type: object
+      required:
+        - apiVersion
+        - messageStatus
+        - operationID
+        - statusDateTime
+      properties:
+        apiVersion:
+          type: string
+          description: The version of LAANC API used by the USS.
+        messageStatus:
+          type: string
+          description: 'The action taken on the flight operation by the LAANC system or an
+            ATC user. (Values: "REQ_APPROVED", "REQ_DENIED", "REQ_RESCINDED",
+            "RFR_EXPIRED", "NO_OP")'
+        operationID:
+          type: string
+          description: The 9-character operationID provided by the USS when originally
+            submitting the flight operation or 9-character noopID when NoOp is
+            called.
+        statusDateTime:
+          type: integer
+          format: int64
+          description: The DateTime when the action was taken on the flight operation
+            represented as a Unix timestamp. Time zone is UTC.
+    OperationProperties44809AuthUpdateDTO:
+      type: object
+      required:
+        - airspaceClassCodes
+        - facility
+        - facilityMaps
+        - operationDuration
+        - operationID
+        - operationMaxAltitude
+        - operationStartDateTime
+        - pocFirstName
+        - pocLastName
+        - pocPhoneNumber
+      properties:
+        airspaceClassCodes:
+          type: array
+          description: 'The list of Airspace Class Codes. Allowed values: "B", "C", "D",
+            "E"'
+          items:
+            type: string
+        facility:
+          type: string
+          description: "The unique identifier for the facility. (Size: min=3, max=4)"
+        facilityMaps:
+          type: array
+          description: The list of facility maps that the operation will intersect. Each
+            element must include the globalId and lastEditDate for that facility
+            map grid.
+          items:
+            $ref: "#/components/schemas/FacilityMapDTO"
+        operationDuration:
+          type: integer
+          format: int32
+          description: The length of time in minutes of the operation. The duration must be
+            between 1 and 720 minutes.
+        operationID:
+          type: string
+          description: "The unique identifier for the operation. (Size: required=9)"
+        operationMaxAltitude:
+          type: integer
+          format: int32
+          description: "The maximum operation altitude above ground level (AGL) in feet.
+            (value: min=1, max=400)"
+        operationRadius:
+          type: number
+          format: double
+          description: "For Points, the distance in nautical miles of the operation from
+            the provided latitude and longitude point. For Polygons, no value
+            can be specified. (Size: min=1 char, max=10 chars; Value: max linear
+            extent =10nmi; Format: floating point number)"
+        operationStartDateTime:
+          type: string
+          description: "The start date and time of the operation. The start date and time
+            must be in the future but cannot be more than 90 days in the future.
+            (Format: required= yyyy-MM-ddTHH:mm:ssZ ). Time Zone is UTC"
+        pocFirstName:
+          type: string
+          description: "The point of contact's first name. (Size: max=60 characters)"
+        pocLastName:
+          type: string
+          description: "The point of contact's last name. (Size: max=60 characters)"
+        pocPhoneNumber:
+          type: integer
+          format: int32
+          description: "The point of contact’s phone number. (Size: min=2, max=15)"
+        registrationNumbers:
+          type: array
+          description: "The list of registration numbers for the sUASs that will be
+            operated during the operation. (Size: min=1, max=13)"
+          items:
+            type: string
+      description: The UAS flight plan information.
+    FeatureCollectionAuthDTO_OperationProperties44809AuthDTO_:
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        features:
+          type: array
+          description: A valid GeoJSON feature list.
+          items:
+            $ref: "#/components/schemas/FeatureDTO_OperationProperties44809AuthDTO_"
+        type:
+          type: string
+          description: "The type of feature collection object. (Value: FeatureCollection)"
+    FeatureDTO_OperationProperties107AuthDTO_:
+      type: object
+      required:
+        - geometry
+        - properties
+        - type
+      properties:
+        geometry:
+          $ref: "#/components/schemas/GeometryDTO"
+        properties:
+          $ref: "#/components/schemas/OperationProperties107AuthDTO"
+        type:
+          type: string
+          description: "The type of geometry object. (Value: Feature)"
+      description: A valid GeoJSON feature.
+    FeatureDTO_OperationProperties44809AuthDTO_:
+      type: object
+      required:
+        - geometry
+        - properties
+        - type
+      properties:
+        geometry:
+          $ref: "#/components/schemas/GeometryDTO"
+        properties:
+          $ref: "#/components/schemas/OperationProperties44809AuthDTO"
+        type:
+          type: string
+          description: "The type of geometry object. (Value: Feature)"
+      description: A valid GeoJSON feature.
+    FeatureDTO_OperationProperties44809AuthUpdateDTO_:
+      type: object
+      required:
+        - geometry
+        - properties
+        - type
+      properties:
+        geometry:
+          $ref: "#/components/schemas/GeometryDTO"
+        properties:
+          $ref: "#/components/schemas/OperationProperties44809AuthUpdateDTO"
+        type:
+          type: string
+          description: "The type of geometry object. (Value: Feature)"
+      description: A valid GeoJSON feature.
+    FeatureCollectionAuthDTO_OperationProperties107AuthDTO_:
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        features:
+          type: array
+          description: A valid GeoJSON feature list.
+          items:
+            $ref: "#/components/schemas/FeatureDTO_OperationProperties107AuthDTO_"
+        type:
+          type: string
+          description: "The type of feature collection object. (Value: FeatureCollection)"
+    FeatureCollectionAuthDTO_OperationProperties107AuthUpdateDTO_:
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        features:
+          type: array
+          description: A valid GeoJSON feature list.
+          items:
+            $ref: "#/components/schemas/FeatureDTO_OperationProperties107AuthUpdate\
+              DTO_"
+        type:
+          type: string
+          description: "The type of feature collection object. (Value: FeatureCollection)"
+    FeatureCollectionAuthDTO_OperationProperties107RFRDTO_:
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        features:
+          type: array
+          description: A valid GeoJSON feature list.
+          items:
+            $ref: "#/components/schemas/FeatureDTO_OperationProperties107RFRDTO_"
+        type:
+          type: string
+          description: "The type of feature collection object. (Value: FeatureCollection)"
+    FeatureCollectionAuthDTO_OperationProperties44809AuthUpdateDTO_:
+      type: object
+      required:
+        - features
+        - type
+      properties:
+        features:
+          type: array
+          description: A valid GeoJSON feature list.
+          items:
+            $ref: "#/components/schemas/FeatureDTO_OperationProperties44809AuthUpda\
+              teDTO_"
+        type:
+          type: string
+          description: "The type of feature collection object. (Value: FeatureCollection)"
+    FeatureDTO_OperationProperties107AuthUpdateDTO_:
+      type: object
+      required:
+        - geometry
+        - properties
+        - type
+      properties:
+        geometry:
+          $ref: "#/components/schemas/GeometryDTO"
+        properties:
+          $ref: "#/components/schemas/OperationProperties107AuthUpdateDTO"
+        type:
+          type: string
+          description: "The type of geometry object. (Value: Feature)"
+      description: A valid GeoJSON feature.
+    FeatureDTO_OperationProperties107RFRDTO_:
+      type: object
+      required:
+        - geometry
+        - properties
+        - type
+      properties:
+        geometry:
+          $ref: "#/components/schemas/GeometryDTO"
+        properties:
+          $ref: "#/components/schemas/OperationProperties107RFRDTO"
+        type:
+          type: string
+          description: "The type of geometry object. (Value: Feature)"
+      description: A valid GeoJSON feature.
