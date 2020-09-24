@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.0",
   "info" : {
-    "title" : "LF-Actuator",
+    "title" : "LF-Actuator Sep 24, 2020",
     "version" : "1.0"
   },
   "servers" : [ {
